@@ -1,0 +1,5 @@
+const test=require('node:test'),assert=require('node:assert/strict');const c=require('../config.json');const {assignJoinRoles}=require('../src/autoroles');
+const fixture=()=>{const assigned=[];return {assigned,member:{guild:{id:c.guildId,roles:{fetch:async id=>({id,editable:true,managed:false})}},user:{bot:false},roles:{add:async id=>assigned.push(id)}}};};
+test('joins add all eight roles without replacing existing roles',async()=>{const f=fixture();await assignJoinRoles(f.member);assert.deepEqual(f.assigned,c.joinRoleIds);assert.equal(f.assigned.length,8);});
+test('bots and other servers do not receive starter roles',async()=>{const f=fixture();f.member.user.bot=true;await assignJoinRoles(f.member);f.member.user.bot=false;f.member.guild.id='other';await assignJoinRoles(f.member);assert.deepEqual(f.assigned,[]);});
+test('one uneditable role does not prevent remaining starter roles',async()=>{const f=fixture();f.member.guild.roles.fetch=async id=>({id,editable:id!==c.joinRoleIds[0],managed:false});await assert.rejects(assignJoinRoles(f.member),/Starter role assignment failed/);assert.deepEqual(f.assigned,c.joinRoleIds.slice(1));});
