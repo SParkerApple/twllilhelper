@@ -38,3 +38,7 @@ Run `npm test` before pushing. After restart, confirm the console shows `READY T
 The code reuses moderation cases, purge logic and event logging from the user-supplied Goober Town export. The FiveM routing, announcements, reports and ticket workflow are rebuilt for this server.
 
 Discord references: https://docs.discord.com/developers/interactions/application-commands and https://docs.discord.com/developers/events/gateway
+
+## Automatic starter roles
+
+New human members receive all eight requested starter roles: MET Police, PCSO, Standard Response Driver (no blue-light ticket), London Ambulance Service, Student Paramedic, London Fire Brigade, Student Firefighter, and Civilian. Bot accounts are skipped. This applies to future joins, not a bulk change to existing members. Role failures are reported in Member Logs. The bot role must be above every starter role.
