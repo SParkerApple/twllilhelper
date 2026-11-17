@@ -33,7 +33,7 @@ Repository: https://github.com/SParkerApple/twllilhelper
 
 On Bot-Hosting.net choose Application → GitHub (or upload the release archive), Node.js 24, startup `npm start`, and environment variable `DISCORD_TOKEN`. Install dependencies with `npm ci`. Keep `data/` outside any folder replaced by source redeployment, or configure `DATA_DIR` to a persistent location. Do not reset the live data directory during updates.
 
-Run `npm test` before pushing. After restart, confirm the console shows `READY TWL Lil Helper` and test `/status`. Use `/ticket panel` and `/verify` once to publish panels; rerunning edits the bot's saved panel rather than creating another.
+Run `npm test` before pushing. After restart, confirm the console shows `READY TWL Lil Helper` and test `/status`. The bot publishes or refreshes its support and verification panels automatically on startup. `/ticket panel` and `/verify` can refresh them manually; saved message IDs prevent duplicates during normal restarts.
 
 The code reuses moderation cases, purge logic and event logging from the user-supplied Goober Town export. The FiveM routing, announcements, reports and ticket workflow are rebuilt for this server.
 
