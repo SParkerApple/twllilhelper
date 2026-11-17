@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 function acquireProcessLock() {
-  const directory = path.join(__dirname, '../data');
+  const directory = path.resolve(process.env.DATA_DIR || path.join(__dirname, '../data'));
   fs.mkdirSync(directory, { recursive: true });
   const lock = path.join(directory, 'bot.lock');
   try {
