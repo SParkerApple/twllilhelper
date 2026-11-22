@@ -41,4 +41,4 @@ Discord references: https://docs.discord.com/developers/interactions/application
 
 ## Automatic starter roles
 
-New human members receive all eight requested starter roles: MET Police, PCSO, Standard Response Driver (no blue-light ticket), London Ambulance Service, Student Paramedic, London Fire Brigade, Student Firefighter, and Civilian. Bot accounts are skipped. This applies to future joins, not a bulk change to existing members. Role failures are reported in Member Logs. The bot role must be above every starter role.
+New human members receive all nine starter roles: ERPT, MET Police, Police Community Support Officer, Standard Response Driver (no blue-light ticket), London Ambulance Service, Student Paramedic, London Fire Brigade, Student Firefighter, and Civilian. Bot accounts are skipped. This applies to future joins, not a bulk change to existing members. Role failures are reported in Member Logs. The bot role must be above every starter role.
