@@ -48,3 +48,7 @@ ERPT is not assigned automatically. Verification skips Police Community Support 
 ## Server lead log DMs
 
 New bot log posts in all nine configured logging channels are copied to WesternSpi (723343308872744990) and Sean (703990442894688356) by DM. Copies include the source link, text, embeds and attachment links. Each recipient is queued separately with retry handling; closed DMs are marked undeliverable without blocking channel logs. This applies to new logs while the bot is connected, not historical posts. Lead notification IDs do not grant command permissions.
+
+## Ownership mention reminders
+
+When a human message mentions an Owner or Co-Owner, or either ownership role directly, the bot replies: “Please open a ticket in <#1570764465304117248> and refrain from pinging ownership.” One reminder is sent per matching message without pinging anyone. Bots and webhooks are ignored.
