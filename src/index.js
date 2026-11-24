@@ -3,6 +3,8 @@ const {Client,GatewayIntentBits:I,Partials,EmbedBuilder,ActionRowBuilder,ButtonB
 const c=require('../config.json'),db=require('./database'),access=require('./access'),runtime=require('./runtime');
 const client=new Client({intents:[I.Guilds,I.GuildMembers,I.GuildMessages,I.MessageContent,I.GuildModeration,I.GuildVoiceStates,I.GuildExpressions],partials:[Partials.Message,Partials.Channel,Partials.GuildMember,Partials.User],allowedMentions:{parse:[]}});
 const audit=require('./features/moderation-records').createModerationRecords({client,db});
+const notifyLeads=require('./lead-notifications').createLeadNotifications({client,audit});
+client.on('messageCreate',runtime.trackTask(m=>notifyLeads(m).catch(e=>console.error('Lead log notification:',e.code||e.message))));
 const purge=require('./features/purge').createPurge({audit});
 const moderation=require('./moderation')({client,db,moderationRecords:audit,purge});
 const tickets=require('./tickets').createTickets({client,db,audit});

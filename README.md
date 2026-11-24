@@ -44,3 +44,7 @@ Discord references: https://docs.discord.com/developers/interactions/application
 Human members receive all eight starter roles when pressing Verify: MET Police, Police Community Support Officer, Standard Response Driver (no blue-light ticket), London Ambulance Service, Student Paramedic, London Fire Brigade, Student Firefighter, and Civilian. Bot accounts are skipped. Joining alone does not assign roles. This applies when verifying, not as a bulk change to existing members. If a starter role cannot be assigned, verification reports the failure and can be retried. The bot role must be above every starter role.
 
 ERPT is not assigned automatically. Verification skips Police Community Support Officer for members holding one of the configured MET ranks from MPS Constable through Commissioner. LAS, LFB and staff ranks do not trigger this exception.
+
+## Server lead log DMs
+
+New bot log posts in all nine configured logging channels are copied to WesternSpi (723343308872744990) and Sean (703990442894688356) by DM. Copies include the source link, text, embeds and attachment links. Each recipient is queued separately with retry handling; closed DMs are marked undeliverable without blocking channel logs. This applies to new logs while the bot is connected, not historical posts. Lead notification IDs do not grant command permissions.
