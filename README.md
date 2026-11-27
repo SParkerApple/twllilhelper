@@ -58,3 +58,5 @@ When a human message mentions an Owner or Co-Owner, or either ownership role dir
 The getting-started panel is refreshed in channel 1566163079496994948 with FiveM and website link buttons, joining instructions, department/spawn guidance and the CAD sequence: /link in-game, /linkme in Discord, then /sync in Discord. These linking commands belong to the existing CAD integration, not this bot.
 
 Use root index.js or npm start for the worker supervisor. Crashes restart with 5–60 second backoff. Ticket/panel/command setup failures retry without exiting the connected bot. This cannot recover a host-stopped container or hosting outage. Persistent storage failures still stop the worker to protect records.
+
+Ownership reminders exempt senders with Server Management, Co-Owner or Owner roles. A reply that mentions its ownership recipient also includes instructions and Discord’s official image showing the reply ping switched off. Replies with the ping already off do not trigger this reminder.
