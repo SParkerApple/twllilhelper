@@ -45,3 +45,13 @@ test('Management, Co-Owner and Owner senders are exempt from direct and reply re
 test('reply pings to ownership include the illustrated toggle instructions',async()=>{const f=fixture(c.ownership);f.message.reference={messageId:'original'};f.message.mentions.repliedUser={id:'person'};await remindOwnershipMention(f.message);assert.match(f.replies[0].content,/@ OFF/);assert.ok(f.replies[0].embeds[0].toJSON().image.url);assert.equal(f.replies[0].allowedMentions.repliedUser,false);});
 test('replies with ping already off do not trigger a reminder',async()=>{const f=fixture(c.ownership);f.message.reference={messageId:'original'};f.message.mentions.repliedUser={id:'person'};f.message.mentions.users.clear();await remindOwnershipMention(f.message);assert.equal(f.replies.length,0);});
 test('replying to a non-owner while mentioning ownership does not show misleading reply instructions',async()=>{const f=fixture(c.ownership);f.message.reference={messageId:'original'};f.message.mentions.repliedUser={id:'non-owner'};await remindOwnershipMention(f.message);assert.equal(f.replies.length,1);assert.equal(f.replies[0].embeds,undefined);});
+
+test('only the bot reminder is deleted after ten seconds',async t=>{
+ t.mock.timers.enable({apis:['setTimeout']});
+ const f=fixture(c.ownership);let deleted=0;
+ f.message.reply=async payload=>{f.replies.push(payload);return {delete:async()=>{deleted++;}};};
+ f.message.delete=async()=>assert.fail('Must never delete the member message');
+ await remindOwnershipMention(f.message);
+ t.mock.timers.tick(9999);await Promise.resolve();assert.equal(deleted,0);
+ t.mock.timers.tick(1);await Promise.resolve();assert.equal(deleted,1);
+});
