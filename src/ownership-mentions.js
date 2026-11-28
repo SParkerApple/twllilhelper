@@ -20,7 +20,7 @@ async function remindOwnershipMention(message) {
     }
   }
   if (!ownershipMentioned) return;
-  await message.reply({
+  const reminder = await message.reply({
     content: `Please open a ticket in <#${c.channels.support}> and refrain from pinging ownership.` +
       (ownershipReply ? '\nWhen replying to an ownership message, turn the reply ping **OFF** before sending: click or tap **@ ON** beside the reply bar so it changes to **@ OFF**.' : ''),
     ...(ownershipReply ? { embeds: [new EmbedBuilder().setColor(0x3498db)
@@ -29,6 +29,11 @@ async function remindOwnershipMention(message) {
       .setImage('https://support.discord.com/hc/article_attachments/360097294054')] } : {}),
     allowedMentions: { parse: [], repliedUser: false },
   });
+  const timer = setTimeout(async () => {
+    try { await reminder.delete(); }
+    catch (error) { if (error.code !== 10008) console.warn('Ownership reminder cleanup:', error.code || error.message); }
+  }, 10000);
+  timer.unref();
 }
 
 module.exports = { remindOwnershipMention };
